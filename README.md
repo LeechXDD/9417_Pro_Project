@@ -14,7 +14,7 @@
 ## Preparation
 
 ### Prior to the execution of the programme, the directory structure must be setup as follow in Colab.
-
+```tree
 content
 |_ _ drive
 |	|_ _ MyDrive
@@ -29,7 +29,7 @@ content
 |	|	|	|_ _test.csv
 |	|	|	|_ _train.csv
 |	|	|	|_ _train_labels.csv
-
+```
 
 ### Download the kaggle dataset from the competition page
 1. Go to https://www.kaggle.com/competitions/predict-student-performance-from-game-play/data
