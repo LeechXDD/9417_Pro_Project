@@ -31,11 +31,11 @@ content
 |	|	|	|_ _train_labels.csv
 ```
 
-### Download the kaggle dataset from the competition page
-1. Go to https://www.kaggle.com/competitions/predict-student-performance-from-game-play/data
-and click the black **'Download All'** button at the down right corner. A downloaded dataset can also be found
-in the git repository 
-2. Place the download dataset and unzip the dataset into the directory showed above
+### Download the kaggle dataset from the KaggleDatasetDownload.ipynb
+1. Open the KaggleDatasetDownload.ipynb in your colab 
+2. Follow the introduction and get your own kaggle.json file
+3. Run the KaggleDatasetDownload.ipynb to generate zipped dataset
+4. Unzip the dataset
 
 ## Program execution
 Due to the lengthy duration of the training and feature engineering processes, all intermediate 
