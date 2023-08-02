@@ -29,6 +29,7 @@ content
 |	|	|	|_ _test.csv
 |	|	|	|_ _train.csv
 |	|	|	|_ _train_labels.csv
+|	|	|	|_ _kaggle.json
 ```
 
 ### Download the kaggle dataset from the KaggleDatasetDownload.ipynb
