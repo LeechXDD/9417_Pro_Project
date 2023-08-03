@@ -20,9 +20,7 @@ desired, the following execution order must be followed:
 2. `Visit https://www.kaggle.com/competitions/predict-student-performance-from-game-play/data to download the dataset
 and place the dataset under the root folder of the project`
 3. `pip install -r requirements.txt`
-4. `Run SVM.ipynb to generate SVM_pred.npy`
-5. `Run LSTM.ipynb to generate LSTM_pred.npy`
-6. `Run xgb_final_with_engine.ipynb to get the final prediction result`
+
 
 ## Preparation for running the file on Colab
 
@@ -51,10 +49,10 @@ content
 3. Run the KaggleDatasetDownload.ipynb to generate zipped dataset
 4. Unzip the dataset
 
-## Program execution
-1. `Run SVM.ipynb to generate SVM_pred.npy`
-2. `Run LSTM.ipynb to generate LSTM_pred.npy`
-3. `Run xgb_final_with_engine.ipynb to get the final prediction result`
+## Program execution order
+1. `Run SVM.ipynb | SVM.py to generate SVM_pred.npy`
+2. `Run LSTM.ipynb | LSTM.py to generate LSTM_pred.npy`
+3. `Run xgb_final_with_engine.ipynb | xgb_final_with_engine.py to get the final prediction result`
 
 
 
