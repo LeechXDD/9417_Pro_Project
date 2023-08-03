@@ -21,7 +21,7 @@ desired, the following execution order must be followed:
 2. `Visit https://www.kaggle.com/competitions/predict-student-performance-from-game-play/data to download the dataset
 and place the dataset under the root folder of the project`
 3. `pip install -r requirements.txt`
-
+4. `Follow the execution order below`
 
 ## Preparation for running the file on Colab
 
