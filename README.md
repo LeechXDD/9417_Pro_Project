@@ -12,6 +12,7 @@
 
 
 ## Preparation for running the file locally
+For this project to function properly, Python>=3.8 is expected to be used.
 Due to the lengthy duration of the training and feature engineering processes, all intermediate 
 results are documented in the Colab's notebook. However, if a complete local run is 
 desired, the following execution order must be followed:
