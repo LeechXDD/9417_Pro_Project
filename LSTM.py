@@ -15,6 +15,7 @@ from tensorflow.keras.layers import LSTM, Dense
 import numpy as np
 import pandas as pd
 import tensorflow as tf
+import os
 from sklearn.metrics import f1_score
 
 
@@ -357,7 +358,7 @@ for train_indices, test_indices in k_fold.split(dataset_df.index.unique()):
   # Loop through threshold values from 0.4 to 0.8 and select the threshold with
   # the highest `F1 score`.
   for threshold in np.arange(0.4,0.8,0.01):
-      metric = tf.metrics.F1Score(num_classes=2,average="macro",threshold=threshold)
+      metric = tf.metrics.F1Score(average="macro",threshold=threshold)
       y_true = tf.one_hot(true_df.values.reshape((-1)), depth=2)
       y_pred = tf.one_hot((prediction_df.values.reshape((-1))>threshold).astype('int'), depth=2)
       metric.update_state(y_true, y_pred)
@@ -370,7 +371,7 @@ for train_indices, test_indices in k_fold.split(dataset_df.index.unique()):
   print("Best threshold ", best_threshold, "\tF1 score ", max_score)
 
 # Ensemble model result
-LSTM_file_path ='/content/drive/MyDrive/9417project/predictions/LSTM_pred.npy'
-SVM_file_path ='/content/drive/MyDrive/9417project/predictions/SVM_pred.npy'
-np.save(LSTM_file_path,prediction_df)
-LSTM_pred = np.load(LSTM_file_path,allow_pickle=True)
+#LSTM_file_path =f'{os.curdir}/predictions/LSTM_pred.npy'
+#SVM_file_path ='/predictions/SVM_pred.npy'
+#np.save(LSTM_file_path,prediction_df)
+#LSTM_pred = np.load(LSTM_file_path,allow_pickle=True)
