@@ -544,9 +544,9 @@ for q_no in range(1,19):
       model = job.load(model_path)
       valid_pred = model.predict(valid_df)
       valid_pred_proba = model.predict_proba(valid_df)[:, 1]
-      prediction_df.loc[valid_users, q_no-1] += (valid_pred_proba/model_per_question[q_no-1]).flatten()
+      #prediction_df.loc[valid_users, q_no-1] += (valid_pred_proba/model_per_question[q_no-1]).flatten()
 # To save prediction file to local for easy access later #
-file_path =f'{os.curdir}/predictions/SVM_pred.npy'
+#file_path =f'{os.curdir}/predictions/SVM_pred.npy'
 
 np.save(file_path,prediction_df)
 loaded_array = np.load(file_path,allow_pickle=True)
