@@ -15,6 +15,7 @@ from tensorflow.keras.layers import LSTM, Dense
 import numpy as np
 import pandas as pd
 import tensorflow as tf
+import os
 from sklearn.metrics import f1_score
 
 
@@ -370,7 +371,8 @@ for train_indices, test_indices in k_fold.split(dataset_df.index.unique()):
   print("Best threshold ", best_threshold, "\tF1 score ", max_score)
 
 # Ensemble model result
-LSTM_file_path ='/content/drive/MyDrive/9417project/predictions/LSTM_pred.npy'
-SVM_file_path ='/content/drive/MyDrive/9417project/predictions/SVM_pred.npy'
-np.save(LSTM_file_path,prediction_df)
-LSTM_pred = np.load(LSTM_file_path,allow_pickle=True)
+#LSTM_file_path =f'{os.curdir}/predictions/LSTM_pred.npy'
+#SVM_file_path ='/predictions/SVM_pred.npy'
+#np.save(LSTM_file_path,prediction_df)
+#LSTM_pred = np.load(LSTM_file_path,allow_pickle=True)
+
