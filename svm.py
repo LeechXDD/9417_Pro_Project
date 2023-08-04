@@ -23,8 +23,6 @@ import joblib as job
 import os
 
 
-print("TensorFlow v" + tf.__version__)
-
 dataset_df = pd.read_csv('train.csv')
 labels = pd.read_csv('train_labels.csv')
 
@@ -64,6 +62,12 @@ def get_minimal_dtype(df):
     print("Memory usage became: ",mem_usg," MB")
 
     return df
+
+def split_dataset(dataset, test_ratio=0.20):
+    USER_LIST = dataset.index.unique()
+    split = int(len(USER_LIST) * (1 - 0.20))
+    return dataset.loc[USER_LIST[:split]], dataset.loc[USER_LIST[split:]]
+
 dataset_df = get_minimal_dtype(dataset_df)
 
 
@@ -498,6 +502,49 @@ for train_indices, test_indices in k_fold.split(dataset_df.index.unique()):
   print("threshold ", best_threshold, "\tF1 score ", max_score)
 
 
+#Generate npy used for ensemble
+prediction_df = pd.DataFrame(data=np.zeros((len(VALID_USER_LIST),18)), index=VALID_USER_LIST)
+train_x, valid_x = split_dataset(dataset_df)
+VALID_USER_LIST = valid_x.index.unique()
+for q_no in range(1,19):
+
+    # Select level group for the question based on the q_no.
+    if q_no<=3: grp = '0-4'
+    elif q_no<=13: grp = '5-12'
+    elif q_no<=22: grp = '13-22'
+    print("### q_no", q_no, "grp", grp)
+
+
+    # Filter the rows in the datasets based on the selected level group.
+    train_df = train_x.loc[train_x.level_group == grp]
+    train_users = train_df.index.values
+    valid_df = valid_x.loc[valid_x.level_group == grp]
+    valid_users = valid_df.index.values
+
+    # Drop the 'correct' and 'level_group' columns from the features
+    train_df = train_df.drop(columns=["level_group"])
+    valid_df = valid_df.drop(columns=["level_group"])
+
+    # Select the labels for the related q_no.
+    #print(train_users)
+    train_labels = labels.loc[labels.q==q_no].set_index('session').loc[train_users]
+    valid_labels = labels.loc[labels.q==q_no].set_index('session').loc[valid_users]
+
+    valid_labels = valid_labels['correct']
+
+
+    sub_model_number = train_sub_models(train_df.copy(),train_users.copy(),train_labels.copy(),q_no)
+    model_per_question.append(sub_model_number)
+
+    if q_no<=3: grp = '0-4'
+    elif q_no<=13: grp = '5-12'
+    elif q_no<=22: grp = '13-22'
+    for model_number in range(model_per_question[q_no-1]):
+      model_path = f'{os.curdir}/models/SVM_models/model_{grp}_{q_no}_sub{model_number}.joblib'
+      model = job.load(model_path)
+      valid_pred = model.predict(valid_df)
+      valid_pred_proba = model.predict_proba(valid_df)[:, 1]
+      prediction_df.loc[valid_users, q_no-1] += (valid_pred_proba/model_per_question[q_no-1]).flatten()
 # To save prediction file to local for easy access later #
 file_path =f'{os.curdir}/predictions/SVM_pred.npy'
 
