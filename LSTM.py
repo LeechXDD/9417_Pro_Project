@@ -16,7 +16,7 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 from sklearn.metrics import f1_score
-import tensorflow_addons as tfa
+
 
 """##Data preprocessing"""
 
@@ -357,7 +357,7 @@ for train_indices, test_indices in k_fold.split(dataset_df.index.unique()):
   # Loop through threshold values from 0.4 to 0.8 and select the threshold with
   # the highest `F1 score`.
   for threshold in np.arange(0.4,0.8,0.01):
-      metric = tfa.metrics.F1Score(num_classes=2,average="macro",threshold=threshold)
+      metric = tf.metrics.F1Score(num_classes=2,average="macro",threshold=threshold)
       y_true = tf.one_hot(true_df.values.reshape((-1)), depth=2)
       y_pred = tf.one_hot((prediction_df.values.reshape((-1))>threshold).astype('int'), depth=2)
       metric.update_state(y_true, y_pred)
