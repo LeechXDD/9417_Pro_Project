@@ -11,7 +11,19 @@
 | Liren Ding |  z5369144 |
 
 
-## Preparation
+## Preparation for running the file locally
+For this project to function properly, Python>=3.8 is expected to be used.
+Due to the lengthy duration of the training and feature engineering processes, all intermediate 
+results are documented in the Colab's notebook. However, if a complete local run is 
+desired, the following execution order must be followed:
+
+1. `Download the project zip file into local folder`
+2. `Visit https://www.kaggle.com/competitions/predict-student-performance-from-game-play/data to download the dataset
+and place the dataset under the root folder of the project`
+3. `pip install -r requirements.txt`
+4. `Follow the execution order below`
+
+## Preparation for running the file on Colab
 
 ### Prior to the execution of the programme, the directory structure must be setup as follow in Colab.
 ```tree
@@ -38,14 +50,10 @@ content
 3. Run the KaggleDatasetDownload.ipynb to generate zipped dataset
 4. Unzip the dataset
 
-## Program execution
-Due to the lengthy duration of the training and feature engineering processes, all intermediate 
-results are documented in the Colab's notebook. However, if a complete programme run is 
-desired, the following execution order must be followed:
-
-1. Run SVM.ipynb to generate SVM_pred.npy
-2. Run LSTM.ipynb to generate LSTM_pred.npy
-3. Run xgb_final_with_engine.ipynb to get the final prediction result
+## Program execution order
+1. `Run SVM.ipynb | SVM.py to generate SVM_pred.npy`
+2. `Run LSTM.ipynb | LSTM.py to generate LSTM_pred.npy`
+3. `Run xgb_final_with_engine.ipynb | xgb_final_with_engine.py to get the final prediction result`
 
 
 
